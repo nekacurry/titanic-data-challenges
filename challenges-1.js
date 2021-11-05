@@ -22,7 +22,7 @@
 // Returns a number.
 
 const getTotalPassengers = (data) => {
-	return 0
+	return data.reduce((acc, obj) => acc + 1, 0)
 }
 
 // 2 ---------------------------------------------------------------
@@ -31,7 +31,7 @@ const getTotalPassengers = (data) => {
 // Return a number.
 
 const getSurvivorCount = (data) => {
-	return 0
+	return data.reduce((acc, obj) => obj.fields.survived === 'Yes' ? acc += 1 : acc, 0)
 }
 
 // 3 ---------------------------------------------------------------
