@@ -25,7 +25,7 @@
 // Or if property = 'age' -> [40, 26, 22, 28, 23, 45, 21, ...]
 
 const getAllValuesForProperty = (data, property) => {
-	return []
+	return data.map(pass => pass.fields[property])
 }
 
 // 2 -------------------------------------------------------------
@@ -34,7 +34,7 @@ const getAllValuesForProperty = (data, property) => {
 // array of all the male passengers [{...}, {...}, {...}, ...]
 
 const filterByProperty = (data, property, value) => {
-	return []
+	return data.filter(pass => pass.fields[property] === value)
 }
 
 // 3 -------------------------------------------------------------
@@ -43,7 +43,7 @@ const filterByProperty = (data, property, value) => {
 // given property have been removed
 
 const filterNullForProperty = (data, property) => {
-	return []
+	return data.filter(pass => pass.fields[property] !== undefined)
 }
 
 // 4 -------------------------------------------------------------
@@ -52,7 +52,7 @@ const filterNullForProperty = (data, property) => {
 // Return the total of all values for a given property. This
 
 const sumAllProperty = (data, property) => {
-	return 0
+	return filterNullForProperty(data, property).reduce((sum, pass) => sum + pass.fields[property], 0)
 }
 
 
@@ -67,7 +67,8 @@ const sumAllProperty = (data, property) => {
 // at Cherbourg, 77 emabrked at Queenstown, and 2 are undedfined
 
 const countAllProperty = (data, property) => {
-	return {}
+	return getAllValuesForProperty(data, property).reduce((acc, val) => { acc[val] = acc[val] + 1 || 1 
+    return acc }, {})
 }
 
 
