@@ -78,7 +78,20 @@ const countAllProperty = (data, property) => {
 // of items in each bucket.
 
 const makeHistogram = (data, property, step) => {
-	return []
+  const histogram = filterNullForProperty(data, property).reduce((bucket, pass) => {
+
+    const i = Math.floor(pass.fields[property] / step)
+
+    if (bucket[i]) {
+      bucket[i] += 1
+    } else {
+      bucket[i] = 1
+    }
+
+    return bucket
+  }, [])
+
+  return Array.from(histogram, (v) => v || 0)
 }
 
 // 7 ------------------------------------------------------------
@@ -87,7 +100,9 @@ const makeHistogram = (data, property, step) => {
 // to divide each value by the maximum value in the array.
 
 const normalizeProperty = (data, property) => {
-	return []
+  const arr = data.filter(pass => !isNaN(pass.fields[property])).map(pass => pass.fields[property])
+
+	return arr.map(val => val / Math.max(...arr))
 }
 
 // 8 ------------------------------------------------------------
@@ -98,7 +113,9 @@ const normalizeProperty = (data, property) => {
 // would return ['male', 'female']
 
 const getUniqueValues = (data, property) => {
-	return []
+  const uniqueVal = data.map(pass => pass.fields[property]).reduce((acc, val) => acc.add(val), new Set())
+
+  return Array.from(uniqueVal)
 }
 
 // --------------------------------------------------------------
