@@ -28,7 +28,7 @@ beforeAll((done) => {
 // When you are ready to start on challenge 2 remove the word skip from 
 // the line below: describe.skip() -> describe()
 
-describe.skip('Challenge 2 Titanic', () => {
+describe('Challenge 2 Titanic', () => {
 
 	// Beucause these tests return long arrays of data it was 
 	// impractical to hard code all these arrays here so the 
