@@ -196,7 +196,10 @@ const getMedianAge = (data) => {
 // the total number. 
 
 const getAverageAgeByGender = (data, gender) => {
-	return getAverageAge(data.filter(pass => pass.fields.sex === gender ? true : false))
+  const filterPass = data.filter(pass => !isNaN(pass.fields.age) && pass.fields.sex === gender)
+  const ages = filterPass.reduce((ages, pass) => ages + pass.fields.age, 0)
+
+	return ages / filterPass.length
 }
 
 // --------------------------------------------------------------
